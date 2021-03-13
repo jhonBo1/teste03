@@ -684,7 +684,7 @@ if (text.includes("placa"))
 	
 		if (messagesC.includes("bot")){
 			client.updatePresence(from, Presence.composing)
-			reply("opa🦖!)
+			reply("opaa")
 	}
 	
 			if (messagesC.includes("bah")){
