@@ -1,19 +1,53 @@
-const pack = (prefix) => {
-    return `*PACKS:*
+
+ case "!play":
+
+            if(args.length === 1) return client.reply(from,erroComandoMsg(command),id)
+
+            servicos.obterInfoVideo(body.slice(6)).then(play_video =>{
+
+                if(play_video == null) return client.reply(from,msgs_texto.utilidades.play.nao_encontrado,id)
+
+                if(play_video.duration > 300000) return client.reply(from,msgs_texto.utilidades.play.limite,id)
+
+                let play_espera = preencherTexto(msgs_texto.utilidades.play.espera,play_video.title,play_video.durationFormatted)
+
+                client.reply(from,play_espera,id)
+
+                servicos.obterYtMp3(play_video).then(mp3_path =>{
+
+                    client.sendFile(from, mp3_path, "musica.mp3","", id).then(()=>{
+
+                        fs.unlinkSync(mp3_path)
+
+                    })
+
+                }).catch(err=>{
+
+                    client.reply(from,err.message,id)
+
+                })
+
+            }).catch(err=>{
+
+                client.reply(from,err.message,id)
+
+            })
+
+            break
     
-    *DARK DOMIMA 🐊🚩*
 
-Belle delphine : https://photos.app.goo.gl/Jr4Qk1dFSJepPdRc7 
 
-Pack1: https://photos.app.goo.gl/phyRpNFLcAtsknfJ7 
 
-Kitty kum: https://photos.app.goo.gl/gNxLbJHGVzeWY9iS9 
 
-Misaki Your Waifu: https://photos.app.goo.gl/M9nyHdonAJu5GRjZ9 
 
-pack: https://photos.app.goo.gl/SrogbCbnanL2PJQn7 
 
-Love Lilah : https://photos.app.goo.gl/TBbkjGGdAVHjPFt5A 
-`
-}
-exports.pack = pack
+
+
+
+
+
+
+
+
+
+
